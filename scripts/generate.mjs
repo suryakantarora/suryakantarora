@@ -62,8 +62,8 @@ const PROFILE = {
     ["typescript", "TypeScript", "#4F9AE6"],
     ["flutter", "Flutter", "#54C5F8"],
   ],
-  // Repos with a hand-written case study in README.md; left out of the generated table.
-  caseStudyRepos: ["library-assignment"],
+  // Repos left out of the generated "Also on GitHub" table.
+  hiddenRepos: ["library-assignment"],
 };
 
 // ───────────────────────────── palette / helpers ─────────────────────────────
@@ -466,7 +466,7 @@ async function load() {
     location: user.location?.trim() || "",
     company: user.company?.trim().replace(/^@/, "") || "",
     avatar, photo,
-    featured: own.filter((r) => r.name !== PROFILE.user && !PROFILE.caseStudyRepos.includes(r.name))
+    featured: own.filter((r) => r.name !== PROFILE.user && !PROFILE.hiddenRepos.includes(r.name))
       .sort((a, b) => b.stargazers_count - a.stargazers_count || new Date(b.pushed_at) - new Date(a.pushed_at))
       .slice(0, 6),
   };

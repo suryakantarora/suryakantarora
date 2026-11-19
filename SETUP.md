@@ -37,4 +37,4 @@ open assets/hero.svg
 
 To add a tool, add its Simple Icons path to `scripts/icons.json` under its slug and a `[slug, label, colour]` entry to `PROFILE.coreTools` (the seven large tiles) or `PROFILE.moreTools` (small pills, five per row).
 
-The "Featured engineering" case studies in `README.md` are written by hand. The "Also on GitHub" table below them is rewritten between the `<!-- FEATURED:START -->` and `<!-- FEATURED:END -->` markers; it lists your other non-fork repositories by stars and skips any repo named in `PROFILE.caseStudyRepos`.
+The "Also on GitHub" table in `README.md` is rewritten between the `<!-- FEATURED:START -->` and `<!-- FEATURED:END -->` markers; it lists your non-fork repositories by stars and skips any repo named in `PROFILE.hiddenRepos`.

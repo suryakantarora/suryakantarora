@@ -22,19 +22,6 @@
   <img src="assets/stats.svg" width="100%" alt="Stats from the field: years of experience, GitHub numbers, areas of depth and current focus" />
 </div>
 
-### 🧩 Featured engineering
-
-#### [library-assignment](https://github.com/suryakantarora/library-assignment) — lending service with a fair waitlist
-
-`Java 21` `Spring Boot 3.5` `REST` `Angular` `JUnit`
-
-| | |
-|:--|:--|
-| **Problem** | Members borrow, return and queue for books. A returned book must go to the first person waiting — exactly once, even when requests race. |
-| **Architecture** | Angular SPA → REST controllers → a single service layer → repository interfaces. Storage is in-memory behind those interfaces, so a database can replace it without touching the service. One script builds both halves into a single Spring Boot jar. |
-| **Challenges solved** | **Race-free lending** — every state change is serialised in the service, so a book can never be lent twice.<br/>**Outcomes as types, not exceptions** — "already borrowed", "unavailable" and "not registered" are sealed interfaces of records, handled by exhaustive pattern-matching `switch` in the controller; a missed case is a compile error.<br/>**Waitlist hand-off** — returning a book assigns it to the next person in line in the same step and queues a notification they see at next login.<br/>**Access rules** — per-login token checked in a `HandlerInterceptor`; only the admin manages books or sees who holds one. |
-| **Evidence** | 25 backend tests (18 service, 7 controller) plus Angular unit specs. Builds and runs with one command. |
-
 ### 📦 Also on GitHub
 
 <!-- FEATURED:START -->
