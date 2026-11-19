@@ -1,144 +1,65 @@
 <div align="center">
-  <img src="assets/hero.svg" width="100%" alt="Suryakant — Technical Lead and Java Engineer" />
+  <img src="assets/hero.svg" width="100%" alt="Suryakant — Technical Lead and Java Engineer. Building resilient systems, scalable services and digital products that matter." />
 </div>
 
 <div align="center">
-  <a href="https://github.com/suryakantarora">
-    <img src="https://img.shields.io/badge/GitHub-Follow-111827?style=for-the-badge&logo=github&logoColor=white" />
-  </a>
-  <a href="https://suryakantarora.com">
-    <img src="https://img.shields.io/badge/Portfolio-Visit-7C3AED?style=for-the-badge&logo=googlechrome&logoColor=white" />
-  </a>
+  <img src="assets/pipeline.svg" width="100%" alt="Delivery pipeline: commit, build, test, scan, deploy, observe" />
+</div>
+
+<div align="center">
+  <img src="assets/about.svg" width="100%" alt="My engineering way: design for failure, ship with confidence" />
+</div>
+
+<div align="center">
+  <img src="assets/arsenal.svg" width="100%" alt="Tools I build with: Java, Spring Boot, Quarkus, Hibernate, Kafka, RabbitMQ, PostgreSQL, MongoDB, Redis, Docker, Kubernetes, GitHub Actions, Angular, TypeScript, Flutter, Git, GitHub, OpenAPI" />
+</div>
+
+<div align="center">
+  <img src="assets/stats.svg" width="100%" alt="Stats from the field: live GitHub numbers, language mix and current focus" />
+</div>
+
+### 🚀 Featured builds
+
+<!-- FEATURED:START -->
+| Project | What it is | Stack | ★ |
+|:--|:--|:--|:-:|
+| [**suryakantarora.github.io**](https://github.com/suryakantarora/suryakantarora.github.io) | My Profile | `HTML` `CSS` `JavaScript` | 2 |
+| [**portfolio-3d**](https://github.com/suryakantarora/portfolio-3d) | 3d portfolio website | `JavaScript` `CSS` `HTML` | 1 |
+| [**library-assignment**](https://github.com/suryakantarora/library-assignment) | A small library assignment using angular and java spring boot | `Java` `TypeScript` `CSS` | 0 |
+<!-- FEATURED:END -->
+
+<div align="center">
+  <a href="https://github.com/suryakantarora?tab=repositories">See all repositories →</a>
 </div>
 
 <br/>
 
-## `01` / SYSTEM PROFILE
-
-<table>
-<tr>
-<td width="64%" valign="top">
-
-### Hello, I'm Suryakant 👋
-
-**Technical Lead & Java Engineer** with 8+ years of experience building enterprise platforms, banking systems, payment workflows and distributed services.
-
-I turn complex requirements into secure, maintainable and production-ready software.
-
-<br/>
-
-**FOCUS**
-
-- `Architecture` — Microservices, APIs, event-driven systems
-- `Platform` — Java, Spring Boot, Quarkus
-- `Data` — PostgreSQL, MongoDB, Redis
-- `Delivery` — Docker, Kubernetes, CI/CD
-
-</td>
-<td width="36%" valign="middle" align="center">
-
-<img src="assets/engineer-card.svg" width="100%" alt="Java engineering identity card" />
-
-</td>
-</tr>
-</table>
-
-## `02` / TECHNOLOGY MATRIX
+### 🏙️ Contribution skyline
 
 <div align="center">
-  <img src="https://skillicons.dev/icons?i=java,spring,hibernate,quarkus,postgres,mongodb,redis,kafka,rabbitmq,docker,kubernetes,git,github,angular,typescript,flutter&perline=8" alt="Java, Spring, Quarkus, databases, messaging and DevOps technologies" />
+  <img src="profile-3d-contrib/profile-night-view.svg" width="100%" alt="3D view of the last year of GitHub contributions, with language and activity breakdown" />
 </div>
-
-<br/>
-
-<table>
-<tr>
-<td align="center"><b>BACKEND</b><br/><sub>Java · Spring · Quarkus</sub></td>
-<td align="center"><b>ARCHITECTURE</b><br/><sub>REST · Microservices · OAuth2</sub></td>
-<td align="center"><b>DATA</b><br/><sub>PostgreSQL · MongoDB · Redis</sub></td>
-</tr>
-<tr>
-<td align="center"><b>MESSAGING</b><br/><sub>Kafka · RabbitMQ</sub></td>
-<td align="center"><b>CLOUD DELIVERY</b><br/><sub>Docker · Kubernetes · CI/CD</sub></td>
-<td align="center"><b>PRODUCT</b><br/><sub>Angular · Flutter · TypeScript</sub></td>
-</tr>
-</table>
-
-## `03` / GITHUB TELEMETRY
-
-<div align="center">
-  <img height="180" src="https://github-readme-stats.vercel.app/api?username=suryakantarora&show_icons=true&include_all_commits=true&hide_border=true&bg_color=0B1020&title_color=A78BFA&icon_color=22D3EE&text_color=CBD5E1&ring_color=8B5CF6" alt="GitHub statistics" />
-  <img height="180" src="https://github-readme-stats.vercel.app/api/top-langs/?username=suryakantarora&layout=compact&hide_border=true&bg_color=0B1020&title_color=A78BFA&text_color=CBD5E1&langs_count=8" alt="Top languages" />
-</div>
-
-<div align="center">
-  <img src="https://streak-stats.demolab.com?user=suryakantarora&hide_border=true&background=0B1020&ring=A78BFA&fire=22D3EE&currStreakLabel=A78BFA&sideLabels=CBD5E1&dates=94A3B8&currStreakNum=F8FAFC&sideNums=F8FAFC" width="75%" alt="GitHub contribution streak" />
-</div>
-
-<div align="center">
-  <img src="https://github-readme-activity-graph.vercel.app/graph?username=suryakantarora&hide_border=true&bg_color=0B1020&color=CBD5E1&line=8B5CF6&point=22D3EE&area=true&area_color=7C3AED" width="100%" alt="GitHub contribution activity graph" />
-</div>
-
-## `04` / CONTRIBUTION FLOW
 
 <div align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/suryakantarora/suryakantarora/output/github-contribution-grid-snake-dark.svg" />
-    <img src="https://raw.githubusercontent.com/suryakantarora/suryakantarora/output/github-contribution-grid-snake.svg" width="100%" alt="Animated contribution grid" />
+    <img src="https://raw.githubusercontent.com/suryakantarora/suryakantarora/output/github-contribution-grid-snake.svg" width="100%" alt="Snake animation eating the contribution grid" />
   </picture>
-</div>
-
-## `05` / ENGINEERING SIGNALS
-
-<table>
-<tr>
-<td width="50%" valign="top">
-
-### Banking & Payments
-Secure APIs, card settlement, reconciliation and financial workflow automation.
-
-</td>
-<td width="50%" valign="top">
-
-### Distributed Systems
-Microservices, asynchronous processing, caching, resilience and observability.
-
-</td>
-</tr>
-<tr>
-<td width="50%" valign="top">
-
-### Enterprise Platforms
-Role-based applications, workflow orchestration and reporting systems.
-
-</td>
-<td width="50%" valign="top">
-
-### Product Engineering
-End-to-end delivery across backend services, web applications and mobile experiences.
-
-</td>
-</tr>
-</table>
-
-## `06` / ACTIVE TRANSMISSION
-
-<div align="center">
-  <img src="assets/status-panel.svg" width="100%" alt="Current engineering focus" />
 </div>
 
 <br/>
 
 <div align="center">
-  <b>Open to conversations with engineers and teams building reliable, impactful software.</b>
-  <br/><br/>
-  <a href="https://github.com/suryakantarora">Explore GitHub ↗</a>
-  &nbsp;·&nbsp;
-  <a href="https://suryakantarora.com">Visit Portfolio ↗</a>
+  <img src="assets/connect.svg" width="100%" alt="Let's build something reliable — open to conversations about Java, fintech and architecture" />
 </div>
 
----
+<div align="center">
+  <a href="https://github.com/suryakantarora"><img src="https://img.shields.io/badge/GitHub-Follow-111827?style=for-the-badge&logo=github&logoColor=white" alt="Follow on GitHub" /></a>
+  <a href="https://suryakantarora.com"><img src="https://img.shields.io/badge/Portfolio-Visit-7C3AED?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Visit portfolio" /></a>
+</div>
+
+<br/>
 
 <div align="center">
-  <sub>Designed for clarity · Built for scale · Powered by curiosity and clean code</sub>
+  <sub>Designed for clarity · Built for scale · Cards regenerate daily from live GitHub data</sub>
 </div>

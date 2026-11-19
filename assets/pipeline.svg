@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="880" height="100" viewBox="0 0 880 100" role="img" aria-labelledby="t d">
+<title id="t">Delivery pipeline</title>
+<desc id="d">Animated delivery pipeline: commit, build, test, scan, deploy, observe.</desc>
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#080D1B"/><stop offset=".55" stop-color="#111A35"/><stop offset="1" stop-color="#17102F"/></linearGradient>
+  <linearGradient id="acc" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#22D3EE"/><stop offset=".55" stop-color="#8B5CF6"/><stop offset="1" stop-color="#EC4899"/></linearGradient>
+  <radialGradient id="glow"><stop stop-color="#8B5CF6" stop-opacity=".30"/><stop offset="1" stop-color="#8B5CF6" stop-opacity="0"/></radialGradient>
+  <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M32 0H0V32" fill="none" stroke="#94A3B8" stroke-opacity=".07"/></pattern>
+  <clipPath id="cardclip"><rect x=".5" y=".5" width="879" height="99" rx="18"/></clipPath>
+  
+</defs>
+<rect x=".5" y=".5" width="879" height="99" rx="18" fill="url(#bg)" stroke="#334155"/>
+<g clip-path="url(#cardclip)"><rect width="880" height="100" fill="url(#grid)"/></g>
+
+<path d="M90 44H790" stroke="#334155" stroke-width="2"/>
+<path d="M90 44H790" stroke="url(#acc)" stroke-width="2" stroke-dasharray="6 10" stroke-opacity=".8"><animate attributeName="stroke-dashoffset" values="32;0" dur="1.2s" repeatCount="indefinite"/></path>
+<circle cx="90" cy="44" r="13" fill="#0B1228" stroke="#22D3EE" stroke-width="1.5"/>
+<circle cx="90" cy="44" r="13" fill="#22D3EE" opacity="0"><animate attributeName="opacity" values="0;.85;0;0" keyTimes="0;.04;.2;1" dur="7s" begin="0.00s" repeatCount="indefinite"/></circle>
+<circle cx="90" cy="44" r="4" fill="#22D3EE"/>
+<text x="90" y="78" text-anchor="middle" fill="#CBD5E1" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace" font-size="10" font-weight="700" letter-spacing="1.5">COMMIT</text>
+<circle cx="230" cy="44" r="13" fill="#0B1228" stroke="#22D3EE" stroke-width="1.5"/>
+<circle cx="230" cy="44" r="13" fill="#22D3EE" opacity="0"><animate attributeName="opacity" values="0;.85;0;0" keyTimes="0;.04;.2;1" dur="7s" begin="1.40s" repeatCount="indefinite"/></circle>
+<circle cx="230" cy="44" r="4" fill="#22D3EE"/>
+<text x="230" y="78" text-anchor="middle" fill="#CBD5E1" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace" font-size="10" font-weight="700" letter-spacing="1.5">BUILD</text>
+<circle cx="370" cy="44" r="13" fill="#0B1228" stroke="#A78BFA" stroke-width="1.5"/>
+<circle cx="370" cy="44" r="13" fill="#A78BFA" opacity="0"><animate attributeName="opacity" values="0;.85;0;0" keyTimes="0;.04;.2;1" dur="7s" begin="2.80s" repeatCount="indefinite"/></circle>
+<circle cx="370" cy="44" r="4" fill="#A78BFA"/>
+<text x="370" y="78" text-anchor="middle" fill="#CBD5E1" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace" font-size="10" font-weight="700" letter-spacing="1.5">TEST</text>
+<circle cx="510" cy="44" r="13" fill="#0B1228" stroke="#A78BFA" stroke-width="1.5"/>
+<circle cx="510" cy="44" r="13" fill="#A78BFA" opacity="0"><animate attributeName="opacity" values="0;.85;0;0" keyTimes="0;.04;.2;1" dur="7s" begin="4.20s" repeatCount="indefinite"/></circle>
+<circle cx="510" cy="44" r="4" fill="#A78BFA"/>
+<text x="510" y="78" text-anchor="middle" fill="#CBD5E1" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace" font-size="10" font-weight="700" letter-spacing="1.5">SCAN</text>
+<circle cx="650" cy="44" r="13" fill="#0B1228" stroke="#EC4899" stroke-width="1.5"/>
+<circle cx="650" cy="44" r="13" fill="#EC4899" opacity="0"><animate attributeName="opacity" values="0;.85;0;0" keyTimes="0;.04;.2;1" dur="7s" begin="5.60s" repeatCount="indefinite"/></circle>
+<circle cx="650" cy="44" r="4" fill="#EC4899"/>
+<text x="650" y="78" text-anchor="middle" fill="#CBD5E1" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace" font-size="10" font-weight="700" letter-spacing="1.5">DEPLOY</text>
+<circle cx="790" cy="44" r="13" fill="#0B1228" stroke="#EC4899" stroke-width="1.5"/>
+<circle cx="790" cy="44" r="13" fill="#EC4899" opacity="0"><animate attributeName="opacity" values="0;.85;0;0" keyTimes="0;.04;.2;1" dur="7s" begin="7.00s" repeatCount="indefinite"/></circle>
+<circle cx="790" cy="44" r="4" fill="#EC4899"/>
+<text x="790" y="78" text-anchor="middle" fill="#CBD5E1" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace" font-size="10" font-weight="700" letter-spacing="1.5">OBSERVE</text>
+<circle r="5" fill="#F8FAFC"><animateMotion path="M90 44H790" dur="7s" repeatCount="indefinite"/></circle>
+<circle r="9" fill="#22D3EE" opacity=".25"><animateMotion path="M90 44H790" dur="7s" repeatCount="indefinite"/></circle>
+</svg>

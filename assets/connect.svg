@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="880" height="214" viewBox="0 0 880 214" role="img" aria-labelledby="t d">
+<title id="t">Let's build something reliable</title>
+<desc id="d">Contact: github.com/suryakantarora, suryakantarora.com. Open to conversations about Java · Fintech · Architecture.</desc>
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#080D1B"/><stop offset=".55" stop-color="#111A35"/><stop offset="1" stop-color="#17102F"/></linearGradient>
+  <linearGradient id="acc" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#22D3EE"/><stop offset=".55" stop-color="#8B5CF6"/><stop offset="1" stop-color="#EC4899"/></linearGradient>
+  <radialGradient id="glow"><stop stop-color="#8B5CF6" stop-opacity=".30"/><stop offset="1" stop-color="#8B5CF6" stop-opacity="0"/></radialGradient>
+  <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M32 0H0V32" fill="none" stroke="#94A3B8" stroke-opacity=".07"/></pattern>
+  <clipPath id="cardclip"><rect x=".5" y=".5" width="879" height="213" rx="18"/></clipPath>
+  <linearGradient id="sweep" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#22D3EE" stop-opacity=".35"/><stop offset="1" stop-color="#22D3EE" stop-opacity="0"/></linearGradient>
+</defs>
+<rect x=".5" y=".5" width="879" height="213" rx="18" fill="url(#bg)" stroke="#334155"/>
+<g clip-path="url(#cardclip)"><rect width="880" height="214" fill="url(#grid)"/></g>
+
+<g clip-path="url(#cardclip)"><circle cx="120" cy="107" r="160" fill="url(#glow)"/></g>
+<g fill="none" stroke="#22D3EE" stroke-opacity=".25"><circle cx="120" cy="107" r="24"/><circle cx="120" cy="107" r="48"/><circle cx="120" cy="107" r="72"/><path d="M40 107H200M120 27V187"/></g>
+<circle cx="120" cy="107" fill="none" stroke="#22D3EE" stroke-width="1.5" r="6"><animate attributeName="r" values="6;72" dur="3s" begin="0s" repeatCount="indefinite"/><animate attributeName="opacity" values=".9;0" dur="3s" begin="0s" repeatCount="indefinite"/></circle><circle cx="120" cy="107" fill="none" stroke="#22D3EE" stroke-width="1.5" r="6"><animate attributeName="r" values="6;72" dur="3s" begin="1.5s" repeatCount="indefinite"/><animate attributeName="opacity" values=".9;0" dur="3s" begin="1.5s" repeatCount="indefinite"/></circle>
+<g><animateTransform attributeName="transform" type="rotate" from="0 120 107" to="360 120 107" dur="5s" repeatCount="indefinite"/>
+<path d="M120 107L120 35A72 72 0 0 1 182.4 71Z" fill="url(#sweep)"/><path d="M120 107V35" stroke="#22D3EE" stroke-width="1.5"/></g>
+<circle cx="120" cy="107" r="5" fill="#22D3EE"/>
+<circle cx="152" cy="78" r="3" fill="#EC4899"><animate attributeName="opacity" values="0;1;0;0" keyTimes="0;.1;.5;1" dur="5s" begin="0.4s" repeatCount="indefinite"/></circle>
+<circle cx="84" cy="140" r="3" fill="#A78BFA"><animate attributeName="opacity" values="0;1;0;0" keyTimes="0;.1;.5;1" dur="5s" begin="3s" repeatCount="indefinite"/></circle>
+<text x="240" y="46" fill="#EC4899" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace" font-size="11" font-weight="700" letter-spacing="2" text-anchor="start">// OPEN CHANNEL</text>
+<text x="240" y="76" fill="#F8FAFC" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="22" font-weight="800">Let's build something reliable</text>
+<rect x="240" y="98" width="296" height="40" rx="10" fill="#0F172A" fill-opacity=".85" stroke="#334155"/>
+<rect x="248" y="104" width="28" height="28" rx="8" fill="#F8FAFC" fill-opacity=".12"/>
+<path transform="translate(254 110) scale(0.6667)" fill="#F8FAFC" d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+<text x="286" y="115" fill="#F8FAFC" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12" font-weight="700">GitHub</text>
+<text x="286" y="129" fill="#94A3B8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace" font-size="10">github.com/suryakantarora</text>
+<rect x="548" y="98" width="296" height="40" rx="10" fill="#0F172A" fill-opacity=".85" stroke="#334155"/>
+<rect x="556" y="104" width="28" height="28" rx="8" fill="#22D3EE" fill-opacity=".12"/>
+<g fill="none" stroke="#22D3EE" stroke-width="1.5"><circle cx="570" cy="118" r="7.2"/><ellipse cx="570" cy="118" rx="3.2" ry="7.2"/><path d="M562.8 118H577.2"/></g>
+<text x="594" y="115" fill="#F8FAFC" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12" font-weight="700">Portfolio</text>
+<text x="594" y="129" fill="#94A3B8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace" font-size="10">suryakantarora.com</text>
+<rect x="240" y="148" width="296" height="40" rx="10" fill="#0F172A" fill-opacity=".85" stroke="#334155"/>
+<rect x="248" y="154" width="28" height="28" rx="8" fill="#EC4899" fill-opacity=".12"/>
+<path d="M262 175.5c-3.6-4.2-5.4-6.9-5.4-9.3a5.4 5.4 0 0 1 10.8 0c0 2.4-1.8 5.1-5.4 9.3z" fill="none" stroke="#EC4899" stroke-width="1.5"/><circle cx="262" cy="166.2" r="1.8" fill="#EC4899"/>
+<text x="286" y="165" fill="#F8FAFC" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12" font-weight="700">Based in</text>
+<text x="286" y="179" fill="#94A3B8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace" font-size="10">Chennai</text>
+<rect x="548" y="148" width="296" height="40" rx="10" fill="#0F172A" fill-opacity=".85" stroke="#334155"/>
+<rect x="556" y="154" width="28" height="28" rx="8" fill="#A78BFA" fill-opacity=".12"/>
+<path d="M563.5 162.5h13v8.5h-7.5l-3.5 3.2v-3.2h-2z" fill="none" stroke="#A78BFA" stroke-width="1.5" stroke-linejoin="round"/>
+<text x="594" y="165" fill="#F8FAFC" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12" font-weight="700">Talk to me about</text>
+<text x="594" y="179" fill="#94A3B8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace" font-size="10">Java · Fintech · Architecture</text>
+</svg>
