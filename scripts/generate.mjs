@@ -502,7 +502,7 @@ function featuredTable(d) {
 // ───────────────────────────── main ─────────────────────────────
 const data = await load();
 mkdirSync(join(ROOT, "assets"), { recursive: true });
-const out = { ...(data.photo || data.wave ? { intro: intro(data) } : {}), hero: hero(data), pipeline: pipeline(), about: about(), arsenal: arsenal(), stats: stats(data), connect: connect(data) };
+const out = { ...(data.photo || data.wave ? { "intro-animated": intro(data) } : {}), hero: hero(data), pipeline: pipeline(), about: about(), arsenal: arsenal(), stats: stats(data), connect: connect(data) };
 for (const [name, svg] of Object.entries(out)) writeFileSync(join(ROOT, `assets/${name}.svg`), svg);
 
 const readmePath = join(ROOT, "README.md");

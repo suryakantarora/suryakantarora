@@ -26,13 +26,13 @@ README.md
 
 Everything editable is in the `PROFILE` object at the top of `scripts/generate.mjs`: name, typing lines, positioning pills, tagline, years of experience, depth and focus areas, and the tools. Numbers (repos, stars), the ID-badge photo, location and company come from your public GitHub profile.
 
-The picture on the top card is a short waving loop. It comes from `assets/wave.jpg`, a sprite sheet of 48 square frames (8 columns × 6 rows, 12 frames a second) that `intro.svg` embeds and steps through: it plays forward, pauses, then plays back, so the loop has no jump. To make the sheet from a different clip, crop it square and tile it:
+The picture on the top card is a short waving loop. It comes from `assets/wave.jpg`, a sprite sheet of 48 square frames (8 columns × 6 rows, 12 frames a second) that `intro-animated.svg` embeds and steps through: it plays forward, pauses, then plays back, so the loop has no jump. To make the sheet from a different clip, crop it square and tile it:
 
 ```bash
 ffmpeg -i clip.mp4 -vf "fps=12,crop=720:720:190:0,scale=384:384:flags=lanczos,tile=8x6" -frames:v 1 -q:v 8 assets/wave.jpg
 ```
 
-If the frame count, grid or frame rate changes, update the `WAVE` constant in `scripts/generate.mjs` to match. The sheet makes `intro.svg` about 900 KB.
+If the frame count, grid or frame rate changes, update the `WAVE` constant in `scripts/generate.mjs` to match. The sheet makes `intro-animated.svg` about 900 KB.
 
 If `assets/wave.jpg` is missing, the card falls back to the still photo `assets/coder.jpg` (560×560 JPEG). The glow, earcup ring, cursor and lens-glint overlays are positioned for that picture (the `at(x, y)` source-pixel coordinates in `intro()`) and are only drawn with the still. The details beside the picture come from `PROFILE` and your public GitHub profile (company, location).
 

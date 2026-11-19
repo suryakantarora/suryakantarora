@@ -3,7 +3,7 @@
 </div>
 
 <div align="center">
-  <img src="assets/intro.svg" width="100%" alt="Suryakant at a laptop, waving hello. Technical Lead at Wipro, based in Chennai. 8+ years in banking and payments. Core stack: Java, Spring Boot, Quarkus, Kafka, Kubernetes, PostgreSQL, Redis." />
+  <img src="assets/intro-animated.svg" width="100%" alt="Suryakant at a laptop, waving hello. Technical Lead at Wipro, based in Chennai. 8+ years in banking and payments. Core stack: Java, Spring Boot, Quarkus, Kafka, Kubernetes, PostgreSQL, Redis." />
 </div>
 
 <div align="center">
