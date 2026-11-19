@@ -1,5 +1,7 @@
 # Profile README — how it works
 
+To build a dashboard like this for your own profile, follow [GUIDE.md](GUIDE.md).
+
 The profile is a stack of animated SVG cards in `assets/`, generated from live GitHub data by `scripts/generate.mjs`. GitHub READMEs don't allow CSS or JavaScript, so all motion lives inside the SVGs.
 
 ## Layout
