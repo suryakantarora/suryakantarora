@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="assets/hero.svg" width="100%" alt="Developer profile banner" />
+<img src="assets/hero_new.svg" width="100%" alt="Developer profile banner" />
 
 <br/>
 
