@@ -3,6 +3,10 @@
 </div>
 
 <div align="center">
+  <img src="assets/intro.svg" width="100%" alt="Suryakant coding at a laptop. Technical Lead at Wipro, based in Chennai. 8+ years in banking and payments. Core stack: Java, Spring Boot, Quarkus, Kafka, Kubernetes, PostgreSQL, Redis." />
+</div>
+
+<div align="center">
   <img src="assets/pipeline.svg" width="100%" alt="Delivery pipeline: commit, build, test, scan, deploy, observe" />
 </div>
 

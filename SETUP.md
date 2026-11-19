@@ -26,6 +26,8 @@ README.md
 
 Everything editable is in the `PROFILE` object at the top of `scripts/generate.mjs`: name, typing lines, positioning pills, tagline, years of experience, depth and focus areas, and the tools. Numbers (repos, stars), the ID-badge photo, location and company come from your public GitHub profile.
 
+The photo on the top card is `assets/coder.jpg` (560×560 JPEG, embedded into `intro.svg`). To change it, replace that file and regenerate — the glow, earcup ring, cursor and lens-glint overlays are positioned for the current picture (the `at(x, y)` source-pixel coordinates in `intro()`), so adjust or remove them for a different one. The details beside it come from `PROFILE` and your public GitHub profile (company, location).
+
 Preview locally:
 
 ```sh

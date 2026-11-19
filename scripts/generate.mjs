@@ -4,7 +4,7 @@
 //
 //   node scripts/generate.mjs            (uses GITHUB_TOKEN if set)
 
-import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
+import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -105,6 +105,57 @@ const icon = (slug, x, y, size, fill) =>
   `<path transform="translate(${x} ${y}) scale(${(size / 24).toFixed(4)})" fill="${fill}" d="${ICONS[slug]}"/>`;
 
 // ───────────────────────────── cards ─────────────────────────────
+function intro(d) {
+  const P = { x: 24, y: 24, s: 272 };
+  const at = (ix, iy) => [+(P.x + (ix / 1254) * P.s).toFixed(1), +(P.y + (iy / 1254) * P.s).toFixed(1)]; // source-pixel → card coords
+  const [nx, ny] = at(820, 62), [hx, hy] = at(893, 385), [mx, my] = at(262, 578), [l1x, l1y] = at(585, 388), [l2x, l2y] = at(712, 384);
+  const rows = [
+    ["ROLE", PROFILE.role],
+    ["COMPANY", d.company],
+    ["BASED IN", d.location],
+    ["EXPERIENCE", `${PROFILE.yearsExperience} years in software engineering`],
+    ["DOMAIN", "Banking & Payments · Distributed Systems"],
+    ["STACK", PROFILE.coreTools.slice(0, 4).map((t) => t[1]).join(" · ")],
+    ["PLATFORM", PROFILE.coreTools.slice(4).map((t) => t[1]).join(" · ")],
+  ].filter((r) => r[1]).map(([k, v], i) => {
+    const y = 122 + i * 26, col = [C.cyan, C.lilac, C.pink][i % 3];
+    return `<rect x="332" y="${y - 10}" width="3" height="12" rx="1.5" fill="${col}"/>
+<text x="344" y="${y}" fill="${C.dim}" font-family="${MONO}" font-size="10" font-weight="700" letter-spacing="1.5">${k}</text>
+<text x="452" y="${y}" fill="${C.white}" font-family="${SANS}" font-size="13.5" font-weight="600">${esc(v)}</text>`;
+  }).join("\n");
+  const body = `
+<g clip-path="url(#cardclip)"><circle cx="160" cy="160" r="230" fill="url(#glow)"/></g>
+<path d="M${P.x - 8} ${P.y + 26}V${P.y - 8}H${P.x + 26}M${P.x + P.s - 26} ${P.y + P.s + 8}H${P.x + P.s + 8}V${P.y + P.s - 26}" fill="none" stroke="${C.cyan}" stroke-opacity=".6" stroke-width="1.5"/>
+<g>
+<animateTransform attributeName="transform" type="translate" values="0 0;0 -4;0 0" dur="6s" repeatCount="indefinite" calcMode="spline" keySplines=".45 0 .55 1;.45 0 .55 1" keyTimes="0;.5;1"/>
+<g clip-path="url(#pc)">
+<image x="${P.x}" y="${P.y}" width="${P.s}" height="${P.s}" preserveAspectRatio="xMidYMid slice" xlink:href="${d.photo}" href="${d.photo}"/>
+<rect x="${P.x}" y="${P.y}" width="${P.s}" height="${P.s}" fill="url(#tint)"/>
+<circle cx="${nx}" cy="${ny}" r="34" fill="url(#neon)"><animate attributeName="opacity" values=".15;.95;.7;1;.2;.9;.15" keyTimes="0;.3;.34;.38;.42;.6;1" dur="4.2s" repeatCount="indefinite"/></circle>
+<rect x="${P.x}" width="${P.s}" height="46" fill="url(#scan)" y="${P.y - 46}"><animate attributeName="y" values="${P.y - 46};${P.y + P.s}" dur="5.5s" repeatCount="indefinite"/></rect>
+<rect x="${mx}" y="${my}" width="5" height="2" fill="${C.cyan}"><animate attributeName="opacity" values="1;1;0;0" keyTimes="0;.5;.5;1" dur="1s" repeatCount="indefinite"/></rect>
+<circle cx="${hx}" cy="${hy}" r="7.5" fill="none" stroke="${C.cyan}" stroke-width="1.6"><animate attributeName="opacity" values=".1;.9;.1" dur="2.4s" repeatCount="indefinite"/></circle>
+${[[l1x, l1y, 0], [l2x, l2y, 0.12]].map(([x, y, b]) => `<ellipse cx="${x}" cy="${y}" rx="2.2" ry="7" fill="#fff" opacity="0" transform="rotate(35 ${x} ${y})"><animate attributeName="opacity" values="0;0;.75;0;0" keyTimes="0;.86;.9;.95;1" dur="6s" begin="${b}s" repeatCount="indefinite"/><animate attributeName="cx" values="${x - 7};${x - 7};${x + 7};${x + 7}" keyTimes="0;.86;.95;1" dur="6s" begin="${b}s" repeatCount="indefinite"/></ellipse>`).join("")}
+</g>
+<rect x="${P.x}" y="${P.y}" width="${P.s}" height="${P.s}" rx="16" fill="none" stroke="url(#acc)" stroke-width="1.5" stroke-opacity=".8"/>
+</g>
+${label(332, 52, "// WHO'S AT THE KEYBOARD")}
+${heading(332, 84, "The engineer behind the systems")}
+<rect x="722" y="36" width="134" height="24" rx="12" fill="${C.green}" fill-opacity=".12" stroke="${C.green}" stroke-opacity=".7"/>
+<circle cx="738" cy="48" r="4" fill="${C.green}"><animate attributeName="opacity" values="1;.2;1" dur="1.6s" repeatCount="indefinite"/></circle>
+<text x="749" y="51.5" fill="#A7F3D0" font-family="${MONO}" font-size="9.5" font-weight="700" letter-spacing="1">OPEN TO COLLAB</text>
+<path d="M332 98H856" stroke="${C.line}"/>
+${rows}
+${[["{ }", 800, 5.5, 0], ["</>", 836, 7, 2.2], ["@Bean", 770, 8, 1.1]].map(([t, x, dur, b]) => `<text x="${x}" fill="${C.cyan}" font-family="${MONO}" font-size="11" font-weight="700" opacity="0" y="290">${esc(t)}<animate attributeName="y" values="296;120" dur="${dur}s" begin="${b}s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;.45;.45;0" keyTimes="0;.2;.7;1" dur="${dur}s" begin="${b}s" repeatCount="indefinite"/></text>`).join("")}`;
+  return card(320, `${PROFILE.name} — ${PROFILE.role}`,
+    `Photo of ${PROFILE.name} coding at a laptop, with profile details: ${PROFILE.role}${d.company ? ` at ${d.company}` : ""}${d.location ? `, based in ${d.location}` : ""}. ${PROFILE.yearsExperience} years of experience in banking and payments. Core stack: ${PROFILE.coreTools.map((t) => t[1]).join(", ")}.`,
+    body,
+    `<clipPath id="pc"><rect x="${P.x}" y="${P.y}" width="${P.s}" height="${P.s}" rx="16"/></clipPath>
+  <linearGradient id="tint" x1="0" y1="0" x2="0" y2="1"><stop stop-color="${C.violet}" stop-opacity=".10"/><stop offset=".7" stop-color="#080D1B" stop-opacity="0"/><stop offset="1" stop-color="#080D1B" stop-opacity=".45"/></linearGradient>
+  <radialGradient id="neon"><stop stop-color="#C4B5FD" stop-opacity=".75"/><stop offset="1" stop-color="${C.violet}" stop-opacity="0"/></radialGradient>
+  <linearGradient id="scan" x1="0" y1="0" x2="0" y2="1"><stop stop-color="${C.cyan}" stop-opacity="0"/><stop offset=".85" stop-color="${C.cyan}" stop-opacity=".16"/><stop offset="1" stop-color="${C.cyan}" stop-opacity=".5"/></linearGradient>`);
+}
+
 function hero(d) {
   const CH = 9.03; // mono advance at 15px
   const slot = 3.2;
@@ -146,6 +197,13 @@ ${[[-42, 0], [0, -20], [42, 0], [0, 20], [0, 0]].map(([dx, dy], k) => `<circle c
   const packet = (x, dur, begin, col) => `<path d="M${x} 118V254" stroke="${col}" stroke-opacity=".35" stroke-dasharray="2 5"/>
 <circle cx="${x}" cy="118" r="3.2" fill="${col}" opacity="0"><animate attributeName="cy" values="118;254" dur="${dur}s" begin="${begin}s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.9;1" dur="${dur}s" begin="${begin}s" repeatCount="indefinite"/></circle>`;
 
+  const art = `<path d="M592 84V66H610M830 66H848V84M848 300V318H830M610 318H592V300" fill="none" stroke="${C.cyan}" stroke-opacity=".6" stroke-width="1.5"/>
+${slab(254, C.pink, "DATA · EVENTS", 2)}
+${slab(186, C.violet, "SERVICES", 1)}
+${slab(118, C.cyan, "EDGE · API", 0)}
+${packet(cx - 42, 2.6, 0, C.cyan)}${packet(cx, 3.2, 0.8, C.lilac)}${packet(cx + 42, 2.2, 1.4, C.pink)}
+${[[560, 96], [856, 150], [572, 232], [842, 250]].map(([x, y], i) => `<circle cx="${x}" cy="${y}" r="1.8" fill="${C.text}"><animate attributeName="opacity" values=".15;.9;.15" dur="${3 + i * 0.7}s" repeatCount="indefinite"/></circle>`).join("")}`;
+
   const body = `
 <g clip-path="url(#cardclip)"><circle cx="715" cy="180" r="230" fill="url(#glow)"/></g>
 <circle cx="30" cy="28" r="5" fill="#F87171"/><circle cx="46" cy="28" r="5" fill="#FBBF24"/><circle cx="62" cy="28" r="5" fill="${C.green}"/>
@@ -158,15 +216,10 @@ ${typing}
 <text x="40" y="210" fill="${C.dim}" font-family="${SANS}" font-size="14.5">${esc(PROFILE.tagline[0])}</text>
 <text x="40" y="231" fill="${C.dim}" font-family="${SANS}" font-size="14.5">${esc(PROFILE.tagline[1])}</text>
 ${tiles}
-<rect x="722" y="13" width="134" height="24" rx="12" fill="${C.green}" fill-opacity=".12" stroke="${C.green}" stroke-opacity=".7"/>
+${d.photo ? "" : `<rect x="722" y="13" width="134" height="24" rx="12" fill="${C.green}" fill-opacity=".12" stroke="${C.green}" stroke-opacity=".7"/>
 <circle cx="738" cy="25" r="4" fill="${C.green}"><animate attributeName="opacity" values="1;.2;1" dur="1.6s" repeatCount="indefinite"/></circle>
-<text x="749" y="28.5" fill="#A7F3D0" font-family="${MONO}" font-size="9.5" font-weight="700" letter-spacing="1">OPEN TO COLLAB</text>
-<path d="M592 84V66H610M830 66H848V84M848 300V318H830M610 318H592V300" fill="none" stroke="${C.cyan}" stroke-opacity=".6" stroke-width="1.5"/>
-${slab(254, C.pink, "DATA · EVENTS", 2)}
-${slab(186, C.violet, "SERVICES", 1)}
-${slab(118, C.cyan, "EDGE · API", 0)}
-${packet(cx - 42, 2.6, 0, C.cyan)}${packet(cx, 3.2, 0.8, C.lilac)}${packet(cx + 42, 2.2, 1.4, C.pink)}
-${[[560, 96], [856, 150], [572, 232], [842, 250]].map(([x, y], i) => `<circle cx="${x}" cy="${y}" r="1.8" fill="${C.text}"><animate attributeName="opacity" values=".15;.9;.15" dur="${3 + i * 0.7}s" repeatCount="indefinite"/></circle>`).join("")}`;
+<text x="749" y="28.5" fill="#A7F3D0" font-family="${MONO}" font-size="9.5" font-weight="700" letter-spacing="1">OPEN TO COLLAB</text>`}
+${art}`;
   return card(340, `${PROFILE.name} — ${PROFILE.typing[0]}`,
     `Terminal-style profile banner. ${PROFILE.positioning.join(", ")}. ${PROFILE.tagline.join(" ")} ${PROFILE.yearsExperience} years of experience.`,
     body,
@@ -400,6 +453,9 @@ async function load() {
     if (r.ok) avatar = `data:${r.headers.get("content-type") || "image/jpeg"};base64,${Buffer.from(await r.arrayBuffer()).toString("base64")}`;
   } catch { /* badge falls back to an initial */ }
 
+  const photoPath = join(ROOT, "assets/coder.jpg");
+  const photo = existsSync(photoPath) ? `data:image/jpeg;base64,${readFileSync(photoPath).toString("base64")}` : null;
+
   const created = new Date(user.created_at);
   return {
     repos: user.public_repos,
@@ -409,7 +465,7 @@ async function load() {
     yearsOnGithub: Math.floor((Date.now() - created) / (365.25 * 864e5)),
     location: user.location?.trim() || "",
     company: user.company?.trim().replace(/^@/, "") || "",
-    avatar,
+    avatar, photo,
     featured: own.filter((r) => r.name !== PROFILE.user && !PROFILE.caseStudyRepos.includes(r.name))
       .sort((a, b) => b.stargazers_count - a.stargazers_count || new Date(b.pushed_at) - new Date(a.pushed_at))
       .slice(0, 6),
@@ -428,7 +484,7 @@ function featuredTable(d) {
 // ───────────────────────────── main ─────────────────────────────
 const data = await load();
 mkdirSync(join(ROOT, "assets"), { recursive: true });
-const out = { hero: hero(data), pipeline: pipeline(), about: about(), arsenal: arsenal(), stats: stats(data), connect: connect(data) };
+const out = { ...(data.photo ? { intro: intro(data) } : {}), hero: hero(data), pipeline: pipeline(), about: about(), arsenal: arsenal(), stats: stats(data), connect: connect(data) };
 for (const [name, svg] of Object.entries(out)) writeFileSync(join(ROOT, `assets/${name}.svg`), svg);
 
 const readmePath = join(ROOT, "README.md");
