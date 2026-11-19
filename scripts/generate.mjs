@@ -104,11 +104,29 @@ const heading = (x, y, s, size = 22) =>
 const icon = (slug, x, y, size, fill) =>
   `<path transform="translate(${x} ${y}) scale(${(size / 24).toFixed(4)})" fill="${fill}" d="${ICONS[slug]}"/>`;
 
+// Layout of assets/wave.jpg: square frames in a grid, read left to right, top to bottom. Holds are in seconds.
+const WAVE = { cols: 8, rows: 6, frames: 48, fps: 12, restHold: 1.2, endHold: 0.8 };
+
 // ───────────────────────────── cards ─────────────────────────────
 function intro(d) {
   const P = { x: 24, y: 24, s: 272 };
   const at = (ix, iy) => [+(P.x + (ix / 1254) * P.s).toFixed(1), +(P.y + (iy / 1254) * P.s).toFixed(1)]; // source-pixel → card coords
   const [nx, ny] = at(820, 62), [hx, hy] = at(893, 385), [mx, my] = at(262, 578), [l1x, l1y] = at(585, 388), [l2x, l2y] = at(712, 384);
+  // The wave is a sprite sheet (assets/wave.jpg) stepped one frame at a time: hold, play, hold, play back, so the loop has no jump cut.
+  let picture = `<image x="${P.x}" y="${P.y}" width="${P.s}" height="${P.s}" preserveAspectRatio="xMidYMid slice" xlink:href="${d.photo}" href="${d.photo}"/>`;
+  if (d.wave) {
+    const { cols, rows, frames, fps, restHold, endHold } = WAVE;
+    const seq = [[0, restHold], ...Array.from({ length: frames - 2 }, (_, i) => [i + 1, 1 / fps]), [frames - 1, endHold], ...Array.from({ length: frames - 2 }, (_, i) => [frames - 2 - i, 1 / fps])];
+    const total = seq.reduce((a, f) => a + f[1], 0);
+    let t = 0;
+    const keyTimes = seq.map((f) => { const k = (t / total).toFixed(4); t += f[1]; return k; }).join(";");
+    const values = seq.map(([f]) => `${-(f % cols) * P.s} ${-Math.floor(f / cols) * P.s}`).join(";");
+    picture = `<image x="${P.x}" y="${P.y}" width="${cols * P.s}" height="${rows * P.s}" preserveAspectRatio="none" href="${d.wave}"><animateTransform attributeName="transform" type="translate" calcMode="discrete" values="${values}" keyTimes="${keyTimes}" dur="${total.toFixed(2)}s" repeatCount="indefinite"/></image>`;
+  }
+  // These overlays are positioned for the still photo, so they are dropped when the wave plays.
+  const stillOverlays = d.wave ? "" : `<rect x="${mx}" y="${my}" width="5" height="2" fill="${C.cyan}"><animate attributeName="opacity" values="1;1;0;0" keyTimes="0;.5;.5;1" dur="1s" repeatCount="indefinite"/></rect>
+<circle cx="${hx}" cy="${hy}" r="7.5" fill="none" stroke="${C.cyan}" stroke-width="1.6"><animate attributeName="opacity" values=".1;.9;.1" dur="2.4s" repeatCount="indefinite"/></circle>
+${[[l1x, l1y, 0], [l2x, l2y, 0.12]].map(([x, y, b]) => `<ellipse cx="${x}" cy="${y}" rx="2.2" ry="7" fill="#fff" opacity="0" transform="rotate(35 ${x} ${y})"><animate attributeName="opacity" values="0;0;.75;0;0" keyTimes="0;.86;.9;.95;1" dur="6s" begin="${b}s" repeatCount="indefinite"/><animate attributeName="cx" values="${x - 7};${x - 7};${x + 7};${x + 7}" keyTimes="0;.86;.95;1" dur="6s" begin="${b}s" repeatCount="indefinite"/></ellipse>`).join("")}`;
   const rows = [
     ["ROLE", PROFILE.role],
     ["COMPANY", d.company],
@@ -129,13 +147,11 @@ function intro(d) {
 <g>
 <animateTransform attributeName="transform" type="translate" values="0 0;0 -4;0 0" dur="6s" repeatCount="indefinite" calcMode="spline" keySplines=".45 0 .55 1;.45 0 .55 1" keyTimes="0;.5;1"/>
 <g clip-path="url(#pc)">
-<image x="${P.x}" y="${P.y}" width="${P.s}" height="${P.s}" preserveAspectRatio="xMidYMid slice" xlink:href="${d.photo}" href="${d.photo}"/>
+${picture}
 <rect x="${P.x}" y="${P.y}" width="${P.s}" height="${P.s}" fill="url(#tint)"/>
-<circle cx="${nx}" cy="${ny}" r="34" fill="url(#neon)"><animate attributeName="opacity" values=".15;.95;.7;1;.2;.9;.15" keyTimes="0;.3;.34;.38;.42;.6;1" dur="4.2s" repeatCount="indefinite"/></circle>
+${d.wave ? "" : `<circle cx="${nx}" cy="${ny}" r="34" fill="url(#neon)"><animate attributeName="opacity" values=".15;.95;.7;1;.2;.9;.15" keyTimes="0;.3;.34;.38;.42;.6;1" dur="4.2s" repeatCount="indefinite"/></circle>`}
 <rect x="${P.x}" width="${P.s}" height="46" fill="url(#scan)" y="${P.y - 46}"><animate attributeName="y" values="${P.y - 46};${P.y + P.s}" dur="5.5s" repeatCount="indefinite"/></rect>
-<rect x="${mx}" y="${my}" width="5" height="2" fill="${C.cyan}"><animate attributeName="opacity" values="1;1;0;0" keyTimes="0;.5;.5;1" dur="1s" repeatCount="indefinite"/></rect>
-<circle cx="${hx}" cy="${hy}" r="7.5" fill="none" stroke="${C.cyan}" stroke-width="1.6"><animate attributeName="opacity" values=".1;.9;.1" dur="2.4s" repeatCount="indefinite"/></circle>
-${[[l1x, l1y, 0], [l2x, l2y, 0.12]].map(([x, y, b]) => `<ellipse cx="${x}" cy="${y}" rx="2.2" ry="7" fill="#fff" opacity="0" transform="rotate(35 ${x} ${y})"><animate attributeName="opacity" values="0;0;.75;0;0" keyTimes="0;.86;.9;.95;1" dur="6s" begin="${b}s" repeatCount="indefinite"/><animate attributeName="cx" values="${x - 7};${x - 7};${x + 7};${x + 7}" keyTimes="0;.86;.95;1" dur="6s" begin="${b}s" repeatCount="indefinite"/></ellipse>`).join("")}
+${stillOverlays}
 </g>
 <rect x="${P.x}" y="${P.y}" width="${P.s}" height="${P.s}" rx="16" fill="none" stroke="url(#acc)" stroke-width="1.5" stroke-opacity=".8"/>
 </g>
@@ -148,7 +164,7 @@ ${heading(332, 84, "The engineer behind the systems")}
 ${rows}
 ${[["{ }", 800, 5.5, 0], ["</>", 836, 7, 2.2], ["@Bean", 770, 8, 1.1]].map(([t, x, dur, b]) => `<text x="${x}" fill="${C.cyan}" font-family="${MONO}" font-size="11" font-weight="700" opacity="0" y="290">${esc(t)}<animate attributeName="y" values="296;120" dur="${dur}s" begin="${b}s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;.45;.45;0" keyTimes="0;.2;.7;1" dur="${dur}s" begin="${b}s" repeatCount="indefinite"/></text>`).join("")}`;
   return card(320, `${PROFILE.name} — ${PROFILE.role}`,
-    `Photo of ${PROFILE.name} coding at a laptop, with profile details: ${PROFILE.role}${d.company ? ` at ${d.company}` : ""}${d.location ? `, based in ${d.location}` : ""}. ${PROFILE.yearsExperience} years of experience in banking and payments. Core stack: ${PROFILE.coreTools.map((t) => t[1]).join(", ")}.`,
+    `${d.wave ? `Short loop of ${PROFILE.name} at a laptop, waving hello` : `Photo of ${PROFILE.name} coding at a laptop`}, with profile details: ${PROFILE.role}${d.company ? ` at ${d.company}` : ""}${d.location ? `, based in ${d.location}` : ""}. ${PROFILE.yearsExperience} years of experience in banking and payments. Core stack: ${PROFILE.coreTools.map((t) => t[1]).join(", ")}.`,
     body,
     `<clipPath id="pc"><rect x="${P.x}" y="${P.y}" width="${P.s}" height="${P.s}" rx="16"/></clipPath>
   <linearGradient id="tint" x1="0" y1="0" x2="0" y2="1"><stop stop-color="${C.violet}" stop-opacity=".10"/><stop offset=".7" stop-color="#080D1B" stop-opacity="0"/><stop offset="1" stop-color="#080D1B" stop-opacity=".45"/></linearGradient>
@@ -455,6 +471,8 @@ async function load() {
 
   const photoPath = join(ROOT, "assets/coder.jpg");
   const photo = existsSync(photoPath) ? `data:image/jpeg;base64,${readFileSync(photoPath).toString("base64")}` : null;
+  const wavePath = join(ROOT, "assets/wave.jpg");
+  const wave = existsSync(wavePath) ? `data:image/jpeg;base64,${readFileSync(wavePath).toString("base64")}` : null;
 
   const created = new Date(user.created_at);
   return {
@@ -465,7 +483,7 @@ async function load() {
     yearsOnGithub: Math.floor((Date.now() - created) / (365.25 * 864e5)),
     location: user.location?.trim() || "",
     company: user.company?.trim().replace(/^@/, "") || "",
-    avatar, photo,
+    avatar, photo, wave,
     featured: own.filter((r) => r.name !== PROFILE.user && !PROFILE.hiddenRepos.includes(r.name))
       .sort((a, b) => b.stargazers_count - a.stargazers_count || new Date(b.pushed_at) - new Date(a.pushed_at))
       .slice(0, 6),
@@ -484,7 +502,7 @@ function featuredTable(d) {
 // ───────────────────────────── main ─────────────────────────────
 const data = await load();
 mkdirSync(join(ROOT, "assets"), { recursive: true });
-const out = { ...(data.photo ? { intro: intro(data) } : {}), hero: hero(data), pipeline: pipeline(), about: about(), arsenal: arsenal(), stats: stats(data), connect: connect(data) };
+const out = { ...(data.photo || data.wave ? { intro: intro(data) } : {}), hero: hero(data), pipeline: pipeline(), about: about(), arsenal: arsenal(), stats: stats(data), connect: connect(data) };
 for (const [name, svg] of Object.entries(out)) writeFileSync(join(ROOT, `assets/${name}.svg`), svg);
 
 const readmePath = join(ROOT, "README.md");
