@@ -18,39 +18,52 @@ const PROFILE = {
   role: "Technical Lead",
   shell: "suryakant@prod:~$ whoami --profile",
   typing: [
-    "Technical Lead · Java Engineer",
-    "Banking & payments platforms",
-    "Microservices · Kafka · Kubernetes",
+    "Technical Lead · Java · Spring Boot",
+    "Microservices · Distributed Systems",
+    "Banking & Payments platforms",
   ],
+  positioning: ["JAVA", "SPRING BOOT", "MICROSERVICES", "BANKING & PAYMENTS", "DISTRIBUTED SYSTEMS"],
   tagline: ["Building resilient systems, scalable services", "and digital products that matter."],
   yearsExperience: "8+",
   portfolio: "suryakantarora.com",
-  topics: "Java · Fintech · Architecture",
+  topics: "Java · Payments · Distributed Systems",
   focus: [
     ["Distributed systems", "Resilience · Observability"],
     ["Cloud-native delivery", "Containers · CI/CD"],
     ["Product engineering", "Secure APIs · Fintech"],
   ],
-  tools: [
+  // Where the depth is — shown on the stats card.
+  depth: [
+    ["Banking & payments", "Settlement · Reconciliation · APIs"],
+    ["Microservices", "Java · Spring Boot · Quarkus"],
+    ["Event streaming", "Kafka · RabbitMQ"],
+    ["Data", "PostgreSQL · Redis · MongoDB"],
+    ["Platform", "Docker · Kubernetes · CI/CD"],
+  ],
+  // Core stack: large tiles (keep to 7). Supporting: small pills (rows of 5).
+  coreTools: [
     ["openjdk", "Java", "#F89820"],
     ["springboot", "Spring Boot", "#6DB33F"],
     ["quarkus", "Quarkus", "#4695EB"],
-    ["hibernate", "Hibernate", "#BCAE79"],
     ["apachekafka", "Kafka", "#E5E7EB"],
-    ["rabbitmq", "RabbitMQ", "#FF6600"],
-    ["postgresql", "PostgreSQL", "#699ECA"],
-    ["mongodb", "MongoDB", "#47A248"],
-    ["redis", "Redis", "#FF4438"],
-    ["docker", "Docker", "#2496ED"],
     ["kubernetes", "Kubernetes", "#5B8DEF"],
+    ["postgresql", "PostgreSQL", "#699ECA"],
+    ["redis", "Redis", "#FF4438"],
+  ],
+  moreTools: [
+    ["hibernate", "Hibernate", "#BCAE79"],
+    ["rabbitmq", "RabbitMQ", "#FF6600"],
+    ["mongodb", "MongoDB", "#47A248"],
+    ["docker", "Docker", "#2496ED"],
     ["githubactions", "GH Actions", "#2088FF"],
+    ["openapiinitiative", "OpenAPI", "#6BA539"],
+    ["git", "Git", "#F05032"],
     ["angular", "Angular", "#F43F5E"],
     ["typescript", "TypeScript", "#4F9AE6"],
     ["flutter", "Flutter", "#54C5F8"],
-    ["git", "Git", "#F05032"],
-    ["github", "GitHub", "#E5E7EB"],
-    ["openapiinitiative", "OpenAPI", "#6BA539"],
   ],
+  // Repos with a hand-written case study in README.md; left out of the generated table.
+  caseStudyRepos: ["library-assignment"],
 };
 
 // ───────────────────────────── palette / helpers ─────────────────────────────
@@ -105,16 +118,19 @@ function hero(d) {
 <rect y="164" width="8" height="16" fill="${C.cyan}" x="58" opacity="0"><animate attributeName="x" values="58;${58 + full};${58 + full};58;58" keyTimes="${kt}" dur="${cycle}s" begin="${begin}s" repeatCount="indefinite"/><animate attributeName="opacity" calcMode="discrete" values="1;0" keyTimes="0;0.3333" dur="${cycle}s" begin="${begin}s" repeatCount="indefinite"/></rect>`;
   }).join("\n");
 
-  const tiles = [
-    [PROFILE.yearsExperience, "YEARS EXP", C.cyan],
-    [d.repos, "PUBLIC REPOS", C.lilac],
-    [d.stars, "STARS EARNED", C.pink],
-  ].map(([n, l, col], i) => {
-    const x = 40 + i * 114;
-    return `<rect x="${x}" y="256" width="104" height="56" rx="10" fill="${C.panel}" fill-opacity=".8" stroke="${C.line}"/>
-<text x="${x + 12}" y="282" fill="${col}" font-family="${SANS}" font-size="21" font-weight="800">${esc(n)}</text>
-<text x="${x + 12}" y="300" fill="${C.dim}" font-family="${MONO}" font-size="8.5" letter-spacing="1">${l}</text>`;
+  let px = 156, py = 258;
+  const pills = PROFILE.positioning.map((s, i) => {
+    const w = Math.round(s.length * 6.75 + 22), col = [C.cyan, C.cyan, C.lilac, C.pink, C.lilac][i % 5];
+    if (px + w > 500) { px = 156; py += 30; }
+    const out = `<rect x="${px}" y="${py}" width="${w}" height="24" rx="12" fill="${col}" fill-opacity=".10" stroke="${col}" stroke-opacity=".65"/>
+<text x="${px + w / 2}" y="${py + 15.5}" text-anchor="middle" fill="${C.white}" font-family="${MONO}" font-size="9.5" font-weight="700" letter-spacing="1">${esc(s)}</text>`;
+    px += w + 8;
+    return out;
   }).join("\n");
+  const tiles = `<rect x="40" y="256" width="104" height="56" rx="10" fill="${C.panel}" fill-opacity=".8" stroke="${C.line}"/>
+<text x="52" y="282" fill="${C.cyan}" font-family="${SANS}" font-size="21" font-weight="800">${esc(PROFILE.yearsExperience)}</text>
+<text x="52" y="300" fill="${C.dim}" font-family="${MONO}" font-size="8.5" letter-spacing="1">YEARS EXP</text>
+${pills}`;
 
   // isometric service stack
   const cx = 715, hw = 105, hh = 50, t = 14;
@@ -142,9 +158,9 @@ ${typing}
 <text x="40" y="210" fill="${C.dim}" font-family="${SANS}" font-size="14.5">${esc(PROFILE.tagline[0])}</text>
 <text x="40" y="231" fill="${C.dim}" font-family="${SANS}" font-size="14.5">${esc(PROFILE.tagline[1])}</text>
 ${tiles}
-<rect x="384" y="270" width="134" height="28" rx="14" fill="${C.green}" fill-opacity=".12" stroke="${C.green}" stroke-opacity=".7"/>
-<circle cx="400" cy="284" r="4" fill="${C.green}"><animate attributeName="opacity" values="1;.2;1" dur="1.6s" repeatCount="indefinite"/></circle>
-<text x="411" y="288" fill="#A7F3D0" font-family="${MONO}" font-size="9.5" font-weight="700" letter-spacing="1">OPEN TO COLLAB</text>
+<rect x="722" y="13" width="134" height="24" rx="12" fill="${C.green}" fill-opacity=".12" stroke="${C.green}" stroke-opacity=".7"/>
+<circle cx="738" cy="25" r="4" fill="${C.green}"><animate attributeName="opacity" values="1;.2;1" dur="1.6s" repeatCount="indefinite"/></circle>
+<text x="749" y="28.5" fill="#A7F3D0" font-family="${MONO}" font-size="9.5" font-weight="700" letter-spacing="1">OPEN TO COLLAB</text>
 <path d="M592 84V66H610M830 66H848V84M848 300V318H830M610 318H592V300" fill="none" stroke="${C.cyan}" stroke-opacity=".6" stroke-width="1.5"/>
 ${slab(254, C.pink, "DATA · EVENTS", 2)}
 ${slab(186, C.violet, "SERVICES", 1)}
@@ -152,7 +168,7 @@ ${slab(118, C.cyan, "EDGE · API", 0)}
 ${packet(cx - 42, 2.6, 0, C.cyan)}${packet(cx, 3.2, 0.8, C.lilac)}${packet(cx + 42, 2.2, 1.4, C.pink)}
 ${[[560, 96], [856, 150], [572, 232], [842, 250]].map(([x, y], i) => `<circle cx="${x}" cy="${y}" r="1.8" fill="${C.text}"><animate attributeName="opacity" values=".15;.9;.15" dur="${3 + i * 0.7}s" repeatCount="indefinite"/></circle>`).join("")}`;
   return card(340, `${PROFILE.name} — ${PROFILE.typing[0]}`,
-    `Terminal-style profile banner. ${PROFILE.tagline.join(" ")} ${PROFILE.yearsExperience} years of experience, ${d.repos} public repositories, ${d.stars} stars.`,
+    `Terminal-style profile banner. ${PROFILE.positioning.join(", ")}. ${PROFILE.tagline.join(" ")} ${PROFILE.yearsExperience} years of experience.`,
     body,
     `<linearGradient id="name" x1="0" y1="0" x2="1" y2="0"><stop stop-color="${C.cyan}"/><stop offset=".6" stop-color="${C.lilac}"/><stop offset="1" stop-color="#F472B6"/></linearGradient>`);
 }
@@ -205,7 +221,7 @@ ${box(40, 182, 248, 26, "EVENT BUS", C.pink)}
 ${box(60, 238, 96, 28, "POSTGRES", C.cyan)}${box(172, 238, 96, 28, "REDIS", C.cyan)}
 ${label(340, 52, "// MY ENGINEERING WAY")}
 ${heading(340, 84, "Design for failure. Ship with confidence.")}
-<text x="340" y="108" fill="${C.dim}" font-family="${SANS}" font-size="13">${esc(PROFILE.yearsExperience)} years across banking, payments and enterprise platforms.</text>
+<text x="340" y="108" fill="${C.dim}" font-family="${SANS}" font-size="13">${esc(PROFILE.yearsExperience)} years building Java platforms for banking and payments.</text>
 ${bullets}
 <rect x="340" y="262" width="510" height="26" rx="6" fill="${C.pink}" fill-opacity=".08"/>
 <rect x="340" y="262" width="3" height="26" fill="${C.pink}"/>
@@ -214,29 +230,41 @@ ${bullets}
 }
 
 function arsenal() {
-  const x0 = 188, cw = 106, gap = 6, ch = 34;
-  const chips = PROFILE.tools.map(([slug, name, col], i) => {
-    const x = x0 + (i % 6) * (cw + gap), y = 96 + Math.floor(i / 6) * 42;
-    return `<rect x="${x}" y="${y}" width="${cw}" height="${ch}" rx="9" fill="${C.panel}" stroke="${col}" stroke-opacity=".4"><animate attributeName="stroke-opacity" values=".4;1;.4;.4" keyTimes="0;.12;.3;1" dur="5.4s" begin="${(i * 0.3).toFixed(1)}s" repeatCount="indefinite"/></rect>
-${icon(slug, x + 10, y + 9, 16, col)}
-<text x="${x + 33}" y="${y + 21.5}" fill="#E2E8F0" font-family="${SANS}" font-size="11.5" font-weight="600">${esc(name)}</text>`;
+  const x0 = 188, span = 666, cy = 150;
+  const cw = 89, cgap = (span - 7 * cw) / 6;
+  const core = PROFILE.coreTools.map(([slug, name, col], i) => {
+    const x = +(x0 + i * (cw + cgap)).toFixed(1), y = 104;
+    return `<rect x="${x}" y="${y}" width="${cw}" height="58" rx="11" fill="${C.panel}" stroke="${col}" stroke-opacity=".5"><animate attributeName="stroke-opacity" values=".5;1;.5;.5" keyTimes="0;.12;.3;1" dur="4.9s" begin="${(i * 0.7).toFixed(1)}s" repeatCount="indefinite"/></rect>
+<rect x="${x}" y="${y}" width="${cw}" height="58" rx="11" fill="${col}" fill-opacity=".07"/>
+${icon(slug, x + cw / 2 - 11, y + 9, 22, col)}
+<text x="${x + cw / 2}" y="${y + 47}" text-anchor="middle" fill="${C.white}" font-family="${SANS}" font-size="11.5" font-weight="700">${esc(name)}</text>`;
   }).join("\n");
-  const hex = (r) => [0, 1, 2, 3, 4, 5].map((k) => { const a = (Math.PI / 3) * k - Math.PI / 2; return `${(98 + r * Math.cos(a)).toFixed(1)} ${(134 + r * Math.sin(a)).toFixed(1)}`; }).join("L");
+  const pw = 127, pgap = (span - 5 * pw) / 4;
+  const more = PROFILE.moreTools.map(([slug, name, col], i) => {
+    const x = +(x0 + (i % 5) * (pw + pgap)).toFixed(1), y = 194 + Math.floor(i / 5) * 32;
+    return `<rect x="${x}" y="${y}" width="${pw}" height="26" rx="8" fill="${C.panel}" fill-opacity=".7" stroke="${C.line}"/>
+${icon(slug, x + 10, y + 6.5, 13, col)}
+<text x="${x + 30}" y="${y + 17}" fill="${C.text}" font-family="${SANS}" font-size="10.5" font-weight="500">${esc(name)}</text>`;
+  }).join("\n");
+  const pts = [0, 1, 2, 3, 4, 5].map((k) => { const a = (Math.PI / 3) * k - Math.PI / 2; return `${(98 + 40 * Math.cos(a)).toFixed(1)} ${(cy + 40 * Math.sin(a)).toFixed(1)}`; });
+  const sub = (x, y, s) => `<text x="${x}" y="${y}" fill="${C.dim}" font-family="${MONO}" font-size="8.5" letter-spacing="1.5">${s}</text>`;
   const body = `
-<g clip-path="url(#cardclip)"><circle cx="98" cy="134" r="150" fill="url(#glow)"/></g>
-<path d="M128 134L${x0} 92V222Z" fill="url(#beam)"><animate attributeName="opacity" values=".55;1;.55" dur="3.2s" repeatCount="indefinite"/></path>
+<g clip-path="url(#cardclip)"><circle cx="98" cy="${cy}" r="150" fill="url(#glow)"/></g>
+<path d="M128 ${cy}L${x0} 104V162Z" fill="url(#beam)"><animate attributeName="opacity" values=".55;1;.55" dur="3.2s" repeatCount="indefinite"/></path>
 <g fill="none" stroke="url(#acc)" stroke-width="1.6" opacity=".8">
-<ellipse cx="98" cy="134" rx="66" ry="24"><animateTransform attributeName="transform" type="rotate" from="0 98 134" to="360 98 134" dur="14s" repeatCount="indefinite"/></ellipse>
-<ellipse cx="98" cy="134" rx="66" ry="24" transform="rotate(60 98 134)"><animateTransform attributeName="transform" type="rotate" from="60 98 134" to="420 98 134" dur="18s" repeatCount="indefinite"/></ellipse>
+<ellipse cx="98" cy="${cy}" rx="66" ry="24"><animateTransform attributeName="transform" type="rotate" from="0 98 ${cy}" to="360 98 ${cy}" dur="14s" repeatCount="indefinite"/></ellipse>
+<ellipse cx="98" cy="${cy}" rx="66" ry="24" transform="rotate(60 98 ${cy})"><animateTransform attributeName="transform" type="rotate" from="60 98 ${cy}" to="420 98 ${cy}" dur="18s" repeatCount="indefinite"/></ellipse>
 </g>
-<path d="M${hex(40)}Z" fill="#0B1228" stroke="${C.cyan}" stroke-width="1.8"/>
-<path d="M${hex(40).split("L")[0]}L98 134L${hex(40).split("L")[2]}M98 134L${hex(40).split("L")[4]}" fill="none" stroke="${C.violet}" stroke-width="1.6"/>
-<circle cx="98" cy="134" r="6" fill="${C.cyan}"><animate attributeName="r" values="5;8;5" dur="2s" repeatCount="indefinite"/></circle>
+<path d="M${pts.join("L")}Z" fill="#0B1228" stroke="${C.cyan}" stroke-width="1.8"/>
+<path d="M${pts[0]}L98 ${cy}L${pts[2]}M98 ${cy}L${pts[4]}" fill="none" stroke="${C.violet}" stroke-width="1.6"/>
+<circle cx="98" cy="${cy}" r="6" fill="${C.cyan}"><animate attributeName="r" values="5;8;5" dur="2s" repeatCount="indefinite"/></circle>
 ${label(x0, 44, "// TECH ARSENAL")}
 ${heading(x0, 72, "Tools I build with")}
-${label(854, 44, `// ${PROFILE.tools.length} IN ROTATION`, C.faint, "end")}
-${chips}`;
-  return card(236, "Tools I build with", `Technology stack: ${PROFILE.tools.map((t) => t[1]).join(", ")}.`, body,
+${sub(x0, 95, "CORE STACK")}
+${core}
+${sub(x0, 184, "ALSO IN THE TOOLBOX")}
+${more}`;
+  return card(274, "Tools I build with", `Core stack: ${PROFILE.coreTools.map((t) => t[1]).join(", ")}. Also: ${PROFILE.moreTools.map((t) => t[1]).join(", ")}.`, body,
     `<linearGradient id="beam" x1="0" y1="0" x2="1" y2="0"><stop stop-color="${C.cyan}" stop-opacity=".45"/><stop offset="1" stop-color="${C.violet}" stop-opacity="0"/></linearGradient>`);
 }
 
@@ -252,8 +280,8 @@ function stats(d) {
   while (bx < 202) { seed = (seed * 1103515245 + 12345) >>> 0; const w = 1 + ((seed >>> 16) % 3); bars += `<rect x="${bx}" y="294" width="${w}" height="12"/>`; bx += w + 1 + ((seed >>> 20) % 2); }
 
   const tiles = [
-    [d.repos, "PUBLIC REPOS", C.cyan], [d.stars, "STARS EARNED", C.lilac],
-    [d.followers, "FOLLOWERS", C.pink], [d.yearsOnGithub, "YEARS ON GITHUB", C.green],
+    [PROFILE.yearsExperience, "YEARS EXPERIENCE", C.cyan], [d.yearsOnGithub, "YEARS ON GITHUB", C.lilac],
+    [d.repos, "PUBLIC REPOS", C.pink], [d.stars, "STARS EARNED", C.green],
   ].map(([n, l, col], i) => {
     const x = 250 + i * 153;
     return `<rect x="${x}" y="92" width="141" height="58" rx="10" fill="${C.panel}" fill-opacity=".85" stroke="${C.line}"/>
@@ -262,13 +290,11 @@ function stats(d) {
 <text x="${x + 14}" y="143" fill="${C.dim}" font-family="${MONO}" font-size="8" letter-spacing="1">${l}</text>`;
   }).join("\n");
 
-  const max = d.languages[0]?.pct || 1;
-  const langBars = d.languages.map((l, i) => {
-    const y = 200 + i * 22, w = Math.max(6, Math.round((l.pct / max) * 190));
-    return `<text x="264" y="${y + 8}" fill="${C.text}" font-family="${SANS}" font-size="11">${esc(l.name)}</text>
-<rect x="354" y="${y}" width="190" height="8" rx="4" fill="#1E293B"/>
-<rect x="354" y="${y}" width="${w}" height="8" rx="4" fill="url(#acc)"><animate attributeName="width" values="0;${w}" dur="1.4s" begin="${(i * 0.15).toFixed(2)}s" fill="freeze" calcMode="spline" keySplines=".2 .7 .2 1" keyTimes="0;1"/></rect>
-<text x="586" y="${y + 8}" text-anchor="end" fill="${C.dim}" font-family="${MONO}" font-size="10">${l.pct < 1 ? "&lt;1" : Math.round(l.pct)}%</text>`;
+  const depth = PROFILE.depth.map(([t, s], i) => {
+    const y = 208 + i * 22, col = [C.cyan, C.lilac, C.pink, C.cyan, C.lilac][i % 5];
+    return `<rect x="264" y="${y - 9}" width="3" height="11" rx="1.5" fill="${col}"/>
+<text x="275" y="${y}" fill="${C.white}" font-family="${SANS}" font-size="11.5" font-weight="700">${esc(t)}</text>
+<text x="412" y="${y}" fill="${C.dim}" font-family="${SANS}" font-size="10.5">${esc(s)}</text>`;
   }).join("\n");
 
   const focus = PROFILE.focus.map(([t, s], i) => {
@@ -302,13 +328,13 @@ ${heading(250, 72, "Stats from the field")}
 <text x="809" y="44.5" fill="#A7F3D0" font-family="${MONO}" font-size="9.5" font-weight="700" letter-spacing="1.5">LIVE</text>
 ${tiles}
 <rect x="250" y="162" width="350" height="156" rx="10" fill="${C.panel}" fill-opacity=".85" stroke="${C.line}"/>
-<text x="264" y="183" fill="${C.dim}" font-family="${MONO}" font-size="8.5" letter-spacing="1.5">LANGUAGE MIX · PUBLIC REPOS</text>
-${langBars}
+<text x="264" y="183" fill="${C.dim}" font-family="${MONO}" font-size="8.5" letter-spacing="1.5">WHERE THE DEPTH IS</text>
+${depth}
 <rect x="612" y="162" width="238" height="156" rx="10" fill="${C.panel}" fill-opacity=".85" stroke="${C.line}"/>
 <text x="626" y="183" fill="${C.dim}" font-family="${MONO}" font-size="8.5" letter-spacing="1.5">ACTIVE FOCUS</text>
 ${focus}`;
   return card(340, "Stats from the field",
-    `${d.repos} public repositories, ${d.stars} stars, ${d.followers} followers, ${d.yearsOnGithub} years on GitHub. Languages: ${d.languages.map((l) => `${l.name} ${Math.round(l.pct)}%`).join(", ")}.`,
+    `${PROFILE.yearsExperience} years of experience, ${d.yearsOnGithub} years on GitHub, ${d.repos} public repositories, ${d.stars} stars. Depth: ${PROFILE.depth.map(([t, x]) => `${t} (${x})`).join("; ")}.`,
     body,
     `<linearGradient id="strap" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#BE185D"/><stop offset=".5" stop-color="${C.pink}"/><stop offset="1" stop-color="#BE185D"/></linearGradient>
   <linearGradient id="badge" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#16213F"/><stop offset="1" stop-color="#26143F"/></linearGradient>
@@ -363,15 +389,10 @@ async function load() {
   const user = await gh(`/users/${PROFILE.user}`);
   const all = await gh(`/users/${PROFILE.user}/repos?per_page=100&type=owner`);
   const own = all.filter((r) => !r.fork && !r.archived);
-  const bytes = {};
   for (const r of own) {
     if (r.name === PROFILE.user) continue; // the profile repo itself is just this README
     r.langs = await gh(`/repos/${r.full_name}/languages`);
-    for (const [k, v] of Object.entries(r.langs)) bytes[k] = (bytes[k] || 0) + v;
   }
-  const total = Object.values(bytes).reduce((a, b) => a + b, 0) || 1;
-  const languages = Object.entries(bytes).sort((a, b) => b[1] - a[1]).slice(0, 5)
-    .map(([name, v]) => ({ name, pct: (v / total) * 100 }));
 
   let avatar = null;
   try {
@@ -388,8 +409,8 @@ async function load() {
     yearsOnGithub: Math.floor((Date.now() - created) / (365.25 * 864e5)),
     location: user.location?.trim() || "",
     company: user.company?.trim().replace(/^@/, "") || "",
-    languages, avatar,
-    featured: own.filter((r) => r.name !== PROFILE.user)
+    avatar,
+    featured: own.filter((r) => r.name !== PROFILE.user && !PROFILE.caseStudyRepos.includes(r.name))
       .sort((a, b) => b.stargazers_count - a.stargazers_count || new Date(b.pushed_at) - new Date(a.pushed_at))
       .slice(0, 6),
   };
@@ -415,4 +436,4 @@ const readme = readFileSync(readmePath, "utf8");
 const marker = /(<!-- FEATURED:START -->)[\s\S]*?(<!-- FEATURED:END -->)/;
 if (marker.test(readme)) writeFileSync(readmePath, readme.replace(marker, `$1\n${featuredTable(data)}\n$2`));
 
-console.log(`Generated ${Object.keys(out).length} cards · ${data.repos} repos · ${data.stars} stars · ${data.followers} followers · ${data.languages.map((l) => l.name).join(", ")}`);
+console.log(`Generated ${Object.keys(out).length} cards · ${data.repos} repos · ${data.stars} stars · ${data.featured.length} repos in table`);

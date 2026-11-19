@@ -24,7 +24,7 @@ README.md
 
 ## Changing the content
 
-Everything editable is in the `PROFILE` object at the top of `scripts/generate.mjs`: name, typing lines, tagline, years of experience, focus areas and the tool chips. Numbers (repos, stars, followers, languages), the ID-badge photo, location and company come from your public GitHub profile.
+Everything editable is in the `PROFILE` object at the top of `scripts/generate.mjs`: name, typing lines, positioning pills, tagline, years of experience, depth and focus areas, and the tools. Numbers (repos, stars), the ID-badge photo, location and company come from your public GitHub profile.
 
 Preview locally:
 
@@ -33,6 +33,6 @@ node scripts/generate.mjs
 open assets/hero.svg
 ```
 
-To add a tool chip, add its Simple Icons path to `scripts/icons.json` under its slug and a `[slug, label, colour]` entry to `PROFILE.tools` (rows hold six chips).
+To add a tool, add its Simple Icons path to `scripts/icons.json` under its slug and a `[slug, label, colour]` entry to `PROFILE.coreTools` (the seven large tiles) or `PROFILE.moreTools` (small pills, five per row).
 
-The Featured builds table is rewritten between the `<!-- FEATURED:START -->` and `<!-- FEATURED:END -->` markers in `README.md`; it lists your non-fork repositories by stars.
+The "Featured engineering" case studies in `README.md` are written by hand. The "Also on GitHub" table below them is rewritten between the `<!-- FEATURED:START -->` and `<!-- FEATURED:END -->` markers; it lists your other non-fork repositories by stars and skips any repo named in `PROFILE.caseStudyRepos`.
